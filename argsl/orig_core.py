@@ -2,7 +2,6 @@ import argparse
 import os
 import re
 import pathlib
-import ast
 
 _type_map = {
     "str": str,
@@ -11,12 +10,6 @@ _type_map = {
     "path": pathlib.Path,
     "bool": lambda x: x.lower() in ("1", "true", "yes"),
 }
-
-def _safe_literal(value):
-    try:
-        return ast.literal_eval(value)
-    except Exception:
-        return value  # treat as raw string if not evaluable
 
 def argsl(dsl: str) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -44,6 +37,8 @@ def argsl(dsl: str) -> argparse.Namespace:
 
         if type_expr == "flag":
             kwargs["action"] = "store_true"
+        elif type_expr == "false":
+            kwargs["action"] = "store_false"
         else:
             required = "!" in type_expr
             multiple = "*" in type_expr
@@ -56,7 +51,10 @@ def argsl(dsl: str) -> argparse.Namespace:
                 env_fallback = env_fallback.strip()
             elif "=" in type_expr:
                 type_expr, default = type_expr.split("=", 1)
-                default = _safe_literal(default.strip())
+                default = default.strip()
+                # Use eval only for known Python literals
+                if default.startswith(("'", '"')) or default.isdigit():
+                    default = eval(default)
 
             if type_expr.startswith("choice:"):
                 kwargs["choices"] = type_expr.split(":", 1)[1].split(",")
@@ -87,4 +85,3 @@ if __name__ == "__main__":
     --name|-n <str!>     # Your name
     --debug|-d <flag>    # Debug mode
     """))
-

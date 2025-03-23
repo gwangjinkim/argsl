@@ -1,6 +1,6 @@
 [project]
 name = "argsl"
-version = "0.1.0"
+version = "0.1.1"
 description = "A readable DSL on top of argparse"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,10 +12,12 @@ dependencies = []
 
 [project.scripts]
 argsl = "argsl.core:argsl"
+test = "pytest:main"
 
-[project.optional-dependencies]
-dev = ["pytest"]
+[tooluv.dependencies.dev]
+pytest = "*"
 
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+

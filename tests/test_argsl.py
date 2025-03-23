@@ -13,4 +13,3 @@ def test_simple_flags(monkeypatch):
     assert args.name == "Alice"
     assert args.level == "high"
     assert args.debug is True
-
