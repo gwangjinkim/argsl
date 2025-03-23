@@ -47,6 +47,16 @@ test_cases = [
         "argv": ["prog"],
         "dsl": "--default <str=\"hello world\">  # Quoted default string",
         "check": lambda args: args.default == "hello world"
+    },
+    {
+        "argv": ["prog", "--no-cache"],
+        "dsl": "--no-cache <flag>  # disables cache if passed",
+        "check": lambda args: args.no_cache is True
+    },
+    {
+        "argv": ["prog"],
+        "dsl": "--no-cache <flag>  # disables cache if passed",
+        "check": lambda args: args.no_cache is False
     }
 ]
 
