@@ -141,6 +141,7 @@ pytest
 ## Publishing to PyPI
 
 ```bash
+rm -rf dist/     # necessary - otherwise PyPI would upload old version, too, resulting in an error
 uv build
 uv publish
 ```
