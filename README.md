@@ -1,14 +1,20 @@
 # argsl️
 
-A clean and readable DSL for building command-line interfaces in Python — **without the boilerplate**.
+`argsl` is for everybody who finds `argparse` too verbose.
 
-`argsl` is for developers who want fast, expressive CLI definitions using just a few lines of text.
+`argsl` (`args DSL` or `argparse DSL`) allows you to specify your CLI flags
+and arguments with a succinct notation 
+(and at the same time specifying the `--help` text!).
 
----
+```python
+args = argsl("""
+filename <path!>         # required positional
+--name <str!>            # required flag 
+--debug <flag>           # boolean switch
+""")
+```
 
-## Why use `argsl`?
-
-Python’s built-in `argparse` is powerful but verbose:
+instead of:
 
 ```python
 # argparse version
@@ -17,16 +23,7 @@ parser.add_argument("filename", type=pathlib.Path)
 parser.add_argument("--name", required=True)
 parser.add_argument("--debug", action="store_true")
 ```
-
-With `argsl`:
-
-```python
-args = argsl("""
-filename <path!>         # required positional
---name <str!>            # required flag
---debug <flag>           # boolean switch
-""")
-```
+---
 
 - ✅ **Expressive**: just describe your arguments
 - ✅ **No boilerplate**: get `argparse.Namespace` directly
