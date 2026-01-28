@@ -46,7 +46,7 @@ pip install argsl
 
 ---
 
-## 🚀 Basic Example
+## Basic Example
 
 ```python
 from argsl import argsl
