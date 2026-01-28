@@ -36,7 +36,7 @@ parser.add_argument("--debug", action="store_true")
 
 ### Using [`uv`](https://github.com/astral-sh/uv) (recommended):
 ```bash
-uv pip install argsl
+uv add argsl
 ```
 
 ### Or with `pip`:
@@ -121,8 +121,8 @@ args = argsl("""
 ## Development Workflow
 
 ```bash
-uv pip install .[dev]
-uv pip install '.[dev]'   # on zsh (macos)
+uv add .[dev]
+uv add '.[dev]'   # on zsh (macos)
 uv run test
 ```
 
